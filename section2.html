@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+
+<div id="app">
+    <h2 v-once>{{title}}</h2>
+    <!-- buka tutup kurawal gak bisa di pakek ke semua element di html karna itu harus pakek binding(v-bind:) -->
+    <p>{{ sayHello()}} - <a v-bind:href="link">AuraSoft</a> </p>
+    <hr>
+    <p v-html = "finishedLink"></p>
+</div>
+<script>
+    new  Vue({
+        el: '#app',
+        data:{
+            title: 'AuraSoft',
+            link : 'http://aurasoft.co/',
+            finishedLink : '<a href="http://aurasoft.co/">AuraSoft</a>'
+        },
+        methods:{
+            sayHello: function(){
+                this.title = 'Radiant of Our Passion';
+                return this.title;
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
