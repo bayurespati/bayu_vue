@@ -13,6 +13,20 @@
     <p>{{ sayHello()}} - <a v-bind:href="link">AuraSoft</a> </p>
     <hr>
     <p v-html = "finishedLink"></p>
+
+
+    <!-- listening to event -->
+    <button v-on:click="increase(2, $event)">Lick Me Bitch</button>
+    <p>{{counter}}</p>
+
+    <!-- Getting data event form event objenct -->
+    <p v-on:mousemove="updateCoordinates">Coordinate: {{y}}/{{x}} -
+
+        <!-- Stop propagation -->
+        <span v-on:mousemove.stop="">Dead SPOT</span>
+    </p>
+
+    <input type="text" v-on:keyup.enter.space="alertMe">
 </div>
 <script>
     new  Vue({
@@ -20,12 +34,31 @@
         data:{
             title: 'AuraSoft',
             link : 'http://aurasoft.co/',
-            finishedLink : '<a href="http://aurasoft.co/">AuraSoft</a>'
+            finishedLink : '<a href="http://aurasoft.co/">AuraSoft</a>',
+
+            counter:0,
+            x:0,
+            y:0
         },
+
         methods:{
             sayHello: function(){
                 this.title = 'Radiant of Our Passion';
                 return this.title;
+            },
+
+            increase: function (step, event) {
+               this.counter +=step;
+            },
+
+            updateCoordinates: function (event) {
+                this.x = event.clientX;
+                this.y = event.clientY;
+                
+            },
+
+            alertMe: function () {
+                alert('alert');
             }
         }
     });
