@@ -23,6 +23,14 @@
             counter : 0,
             secondCounter: 0
         },
+        watch:{
+            counter: function (value) {
+                var vm = this;
+                setTimeout(function () {
+                    vm.counter=0;
+                },2000);
+            }
+        },
         <!-- apapun yang di simpan dalam computed bisa digunakan seperti munggunakan properti didalam object -->
         computed:{
           output: function () {
