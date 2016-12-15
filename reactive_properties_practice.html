@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJs</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+
+<div id="exersice">
+    <!-- 1) show a "result" of not there yet as long as "value" is not qeual to 37 - you can change
+     "value" with the buttons. print 'done' once you did it -->
+    <div>
+        <p>Current Value : {{ value }}</p>
+        <button @click="value +=5">Add 5</button>
+        <button @click="value +=1">Add 1</button>
+        <p>{{ result }}</p>
+    </div>
+    <!-- 2) watch for change in the "result" and reset the "value" after 5 second (hint: setTimeout(....,5000) -->
+    <div>
+        <input type="text" @keyup="val = $target.event.value">
+        <p>{{ value }}</p>
+    </div>
+</div>
+<script>
+    new Vue({
+        el:'#exersice',
+        data:{
+            value : 0,
+            val : 5
+        },
+        computed : {
+            result : function () {
+                return this.value >= 37 ? 'done' : 'not there yet'
+            }
+        },
+        watch:{
+            result : function () {
+                var vm = this
+                setTimeout(function () {
+                    vm.value=0;
+                },vm.val * 1000);
+            }
+        }
+    });
+</script>
+
+</body>
+</html>
