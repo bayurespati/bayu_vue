@@ -10,20 +10,28 @@
 <div id="app">
     <button v-on:click="counter++">Increase</button>
     <button v-on:click="counter--">Decrease</button>
+    <button v-on:click="secondCounter++">Increase Second</button>
 
-    <p>Counter :{{ counter }}</p>
-    <p>Result :{{ result() }}</p>
+    <p>Counter :{{ counter }} | {{secondCounter}}</p>
+    <p>Result :{{ result() }} | {{ output }}</p>
 
 </div>
 <script>
     new Vue({
         el:'#app',
         data:{
-            counter : 0
+            counter : 0,
+            secondCounter: 0
+        },
+        <!-- apapun yang di simpan dalam computed bisa digunakan seperti munggunakan properti didalam object -->
+        computed:{
+          output: function () {
+              return this.counter > 5 ? 'Greater 5' : 'Small than 5';
+          }
         },
         methods:{
-            result(){
-                return this.counter > 5 ? 'Greater 5' : 'Small than 5'
+            result: function(){
+                return this.counter > 5 ? 'Greater 5' : 'Small than 5';
             }
         }
     });
