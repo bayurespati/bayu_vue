@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="stylePractice.css">
+</head>
+<body>
+
+<div id="exercise">
+    <!-- 1) Start the effect with the button. the Effect should alternate the "highlight" or
+     "shrink" class on each new setInterval tick (attach respective class to the div
+     with id "effect" below)-->
+    <div>
+        <button @click = "startEffect">Start Effect </button>
+        <div id="effect" :class="someStyle"></div>
+    </div>
+    <!-- 2) Create a couple of CSS classes and attach them via the array syntax -->
+    <div :class="[someClasses,{fontColor : !attachClasses }]">I got no class :(</div>
+
+    <!-- 3) Let the user enter a class (create some example classes) and attach it -->
+    <div>
+        <p>1.red 2.blue 3.green</p>
+        <input type="text" v-model="myClasses">
+        <div :class="myClasses"></div>
+    </div>
+
+    <!-- 4) Let the user enter a class and enter true / false for another class
+    (create some example classes) and attach the classes  -->
+
+    <div>
+        <input type="text">
+        <input type="text">
+        <div></div>
+    </div>
+
+    <!-- 5) repeat 3) but now with values for style (instead of class names). attach the respective style -->
+    <div>
+        <input type="text" v-model="width" placeholder="Input width">
+        <div class="classValue" :style="{width : width + 'px'}">
+            <p class="textS">FUCKING</p>
+        </div>
+    </div>
+
+    <!-- 6) create a simple progress bar with setInterval and style bindings.
+     Start it by hitting the below button. -->
+
+    <div>
+        <button @click = "barProses">Start progress</button>
+        <div class="barProses" :style="{width : barProgres + 'px'}"></div>
+    </div>
+</div>
+<script>
+    new  Vue({
+        el: '#exercise',
+        data:{
+            attachClasses : false,
+            someStyle : '',
+            someClasses : 'classesFont',
+            myClasses : '',
+            width : 600,
+            barProgres : 0,
+        },
+        methods : {
+            startEffect: function(){
+                var vm = this;
+                setTimeout(function () {
+                    vm.someStyle = "highlight";
+                },3000)
+            },
+            barProses: function () {
+                this.barProgres = 20;
+            }
+        },
+        watch:{
+            barProgres : function () {
+                var vm = this;
+                setTimeout(function () {
+                    if(vm.barProgres > 600){
+                        vm.barProgres = 0;
+                    }
+                    if(vm.barProgres % 2 == 0){
+
+                    }
+                    vm.barProgres += 5;
+                },100)
+            }
+        }
+
+    });
+</script>
+
+</body>
+</html>
