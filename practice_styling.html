@@ -14,7 +14,7 @@
      with id "effect" below)-->
     <div>
         <button @click = "startEffect">Start Effect </button>
-        <div id="effect" :class="someStyle"></div>
+        <div id="effect" :class="effectClass"></div>
     </div>
     <!-- 2) Create a couple of CSS classes and attach them via the array syntax -->
     <div :class="[someClasses,{fontColor : !attachClasses }]">I got no class :(</div>
@@ -30,9 +30,9 @@
     (create some example classes) and attach the classes  -->
 
     <div>
-        <input type="text">
-        <input type="text">
-        <div></div>
+        <input type="text" v-model="myClasses">
+        <input type="text" v-model="isVisible">
+        <div :class="[{visible:isVisible}, myClasses]"></div>
     </div>
 
     <!-- 5) repeat 3) but now with values for style (instead of class names). attach the respective style -->
@@ -48,26 +48,36 @@
 
     <div>
         <button @click = "barProses">Start progress</button>
-        <div class="barProses" :style="{width : barProgres + 'px'}"></div>
+        <div class="barProses" :style="[{width : barProgres + 'px'}, {background : bcg}]"></div>
     </div>
 </div>
 <script>
     new  Vue({
         el: '#exercise',
         data:{
+            effectClass:{
+                highlight : false,
+                shrink : true
+            },
             attachClasses : false,
-            someStyle : '',
             someClasses : 'classesFont',
             myClasses : '',
             width : 600,
             barProgres : 0,
+            bcg: '',
+            isVisible: true
         },
         methods : {
             startEffect: function(){
+                /* var vm = this;
+                 setTimeout(function () {
+                 vm.someStyle = "highlight";
+                 },3000)*/
                 var vm = this;
-                setTimeout(function () {
-                    vm.someStyle = "highlight";
-                },3000)
+               setInterval(function () {
+                   vm.effectClass.highlight = !vm.effectClass.highlight;
+                   vm.effectClass.shrink = !vm.effectClass.shrink;
+               },500);
             },
             barProses: function () {
                 this.barProgres = 20;
@@ -79,9 +89,12 @@
                 setTimeout(function () {
                     if(vm.barProgres > 600){
                         vm.barProgres = 0;
+                        vm.bcg = "green";
                     }
-                    if(vm.barProgres % 2 == 0){
-
+                    if(vm.barProgres >= 300 && vm.barProgres <= 500){
+                        vm.bcg = "yellow";
+                    }else if(vm.barProgres >= 500){
+                        vm.bcg = "red";
                     }
                     vm.barProgres += 5;
                 },100)
