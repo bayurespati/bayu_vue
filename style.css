@@ -15,3 +15,8 @@
 .black{
     background: black;
 }
+
+.textStyle{
+    color : red;
+    font-size: 300px;
+}

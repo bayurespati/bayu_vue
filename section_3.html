@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app">
+    <p v-if="show">Click Switch You can see a MAGIC!</p>
+    <p v-else class="textSty">FUCK YOU !!!!!</p>
+    <template v-if="show">
+        <h1>Heading</h1>
+        <p>inside a template</p>
+    </template>
+    <p v-show="show">Do you also se me?</p>
+    <button @click="show = !show">Switch</button>
+</div>
+<script>
+    new  Vue({
+        el: '#app',
+        data:{
+            show: true
+        }
+
+    });
+</script>
+
+</body>
+</html>
