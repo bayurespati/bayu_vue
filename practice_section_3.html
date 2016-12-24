@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="exercise">
+    <!-- 1) Hook up the button to toggle the display of the two paragraph. use
+     both v-if and v-show and inspect the element to see the difference -->
+    <div>
+        <button @click = "show = !show">Toggle</button>
+        <p v-if="show">You either see me ... </p>
+        <p v-show="show">... or me</p>
+    </div>
+
+    <!-- 2) Output an <ul> of array elements of your choice. also print the index of each element. -->
+    <ul>
+        <li v-for="(word, index) in niceWord"> {{ word }} ({{ index }})</li>
+    </ul>
+
+    <!-- 3) Print all key-value pairs of the following object : {tittle: 'Lord of the rings',
+    author: 'J.R.R. Tolkiens',book: '3'}. Also print the index of each item  -->
+    <ul>
+        <li v-for="(value,key,index) in myLord">{{ key }} : {{ value }} ({{ index }})</li>
+    </ul>
+
+    <!-- 4) Print the following object (only the values) and also create a nested loop for the array
+     {name : 'TESTOBJECT', data: [1.67, 1.33, 0.98, 2.21]} (hint: use v-for and v-if to achieve this)-->
+    <ul>
+        <li v-for="takePerson in obj">
+            <template v-if="Array.isArray(takePerson)">
+                <div v-for="element in takePerson">{{ element }}</div>
+            </template>
+            <template v-else>
+                {{ takePerson }}
+            </template>
+        </li>
+    </ul>
+</div>
+<script>
+    new Vue({
+       el:"#exercise",
+        data:{
+            show : false,
+            niceWord : ['fucking','fuck','feking','Freaking','viking'],
+            myLord : {
+                tittle: 'Lord of the rings',
+                author: 'J.R.R. Tolkiens',
+                book: '3'
+            },
+            obj: {
+                    name : 'TESTOBJECT',
+                    data: [1.67, 1.33, 0.98, 2.21]
+                }
+
+        }
+    });
+</script>
+</body>
+</html>
