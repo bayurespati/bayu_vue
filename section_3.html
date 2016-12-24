@@ -9,6 +9,7 @@
 <body>
 
 <div id="app">
+    <!--
     <p v-if="show">Click Switch You can see a MAGIC!</p>
     <p v-else class="textSty">FUCK YOU !!!!!</p>
     <template v-if="show">
@@ -17,12 +18,24 @@
     </template>
     <p v-show="show">Do you also se me?</p>
     <button @click="show = !show">Switch</button>
+    -->
+
+    <!-- Rendering lists with v-for -->
+    <ul>
+        <li v-for="ingredient in ingredient">{{ ingredient }}</li>
+    </ul>
 </div>
 <script>
     new  Vue({
         el: '#app',
         data:{
-            show: true
+            /*show: true*/
+            ingredient : ['meat','fruit','cookies'],
+            persons : [
+                {name : 'max', age: 27, color: 'red'},
+                {name : 'Anna', age: 29, color: 'blue'}
+            ]
+
         }
 
     });
