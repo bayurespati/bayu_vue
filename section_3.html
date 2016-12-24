@@ -22,8 +22,29 @@
 
     <!-- Rendering lists with v-for -->
     <ul>
-        <li v-for="(ingredient, i) in ingredient">{{ ingredient }} ({{i}})</li>
+        <li v-for="(ingredient, i) in ingredient" :key="ingredient">{{ ingredient }} ({{i}})</li>
     </ul>
+    <!-- keeping Track of Elements when using v-for -->
+    <button @click="ingredient.push('spices')">Add new</button>
+    <template v-for="(ingredient, index) in ingredient">
+        <h1>{{ ingredient }}</h1>
+        <p>{{ index }}</p>
+    </template>
+
+
+    <!-- looping through objects -->
+    <ul>
+        <li v-for="takePerson in persons">
+            <div v-for="(value,key,index) in takePerson">{{ key }} : {{ value }} ({{ index }})</div>
+        </li>
+    </ul>
+
+    <!-- looping through a list of numbers -->
+    <span v-for="n in 10">{{ n }}</span>
+
+
+
+
 </div>
 <script>
     new  Vue({
