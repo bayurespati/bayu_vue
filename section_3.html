@@ -22,7 +22,7 @@
 
     <!-- Rendering lists with v-for -->
     <ul>
-        <li v-for="ingredient in ingredient">{{ ingredient }}</li>
+        <li v-for="(ingredient, i) in ingredient">{{ ingredient }} ({{i}})</li>
     </ul>
 </div>
 <script>
