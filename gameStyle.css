@@ -1,0 +1,78 @@
+.hpStyle{
+    height: 20px;
+    border: 1px solid lightblue;
+    background: greenyellow;
+    border-radius: 50px;
+}
+.bcg{
+    background: lightgrey;
+    border-radius: 50px;
+    height: 20px;
+    width: 200px;
+}
+
+.fontStyle{
+    font-size: 20px;
+    color: red;
+}
+.character{
+    display: block;
+}
+
+.monster,
+.hero{
+    display: inline-block;
+    text-align: center;
+}
+.hero{
+    width: 200px;
+    margin-right:10px;
+}
+.monster{
+    width: 200px;
+    margin-left: 10px;
+}
+
+.warpGame{
+    margin: 0 auto;
+    width: 960px;
+    text-align: center;
+}
+
+.warpButton{
+    height: 100px;
+    margin-top: 50px;
+    border: 1px solid lightgrey;
+    border-radius: 30px;
+}
+
+.startButton{
+    width: 200px;
+    height: 30px;
+    margin-top: 30px;
+    border-radius: 0.5em;
+}
+
+.heal,
+.giveUp,
+.specialAttack,
+.attack{
+    width: 100px;
+    height: 30px;
+    margin-top: 30px;
+    background: saddlebrown;
+    border-radius: 1em;
+    color: whitesmoke;
+}
+
+.heal{
+    color: black;
+    background: greenyellow;
+}
+.giveUp{
+    color: black;
+    background: ghostwhite;
+}
+.specialAttack{
+    background: darkmagenta;
+}

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="vue.js"></script>
+    <link rel="stylesheet" href="gameStyle.css">
+</head>
+<body>
+
+<div id="exercise">
+
+    <div class="warpGame">
+
+        <div class="character">
+        <!-- MY HERO -->
+        <div class="hero">
+            <p class="fontStyle">My Hero</p>
+            <div class="bcg">
+                <div class="hpStyle" :style="[{width : hpBarHero + 'px'}, {backgroundColor : hpStyleHero}]">
+                    <span>{{ hpBarHero / 2 }}</span>
+                </div>
+            </div>
+         </div>
+        <!-- MONSTER -->
+        <div class="monster">
+            <p class="fontStyle">Bos Monster</p>
+            <div class="bcg">
+                <div class="hpStyle" :style="[{width : hpBarMonster + 'px'}, {backgroundColor : hpStyle}]">
+                    <span>{{ hpBarMonster / 2 }}</span>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="warpButton">
+
+            <button v-if="menuButton" class="startButton" @click="menuButton = false, restart">Start New Game</button>
+            <div v-if="!menuButton">
+                <button class="attack" @click="attack">Attack</button>
+                <button class="specialAttack" @click="specialAttack">Special Attack</button>
+                <button class="heal"@click="heal">Heal</button>
+                <button class="giveUp" @click="menuButton = true">GiveUp</button>
+                <p style="color : red">* You can use special Attack When you Hp below 20</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="menu">
+
+    </div>
+
+</div>
+<script>
+    new Vue({
+       el:'#exercise',
+        data:{
+            menuButton : true,
+            hpBarHero : 200,
+            hpBarMonster: 200,
+            hpStyle: 'greenyellow',
+            hpStyleHero: 'greenyellow'
+        },
+        methods:{
+            startNewGame:function () {
+                this.hpBarHero = 200;
+                this.hpBarMonster= 200;
+            },
+            attack:function () {
+                this.hpBarHero -= Math.floor(Math.random () * 30);
+                this.hpBarMonster -= Math.floor(Math.random () * 10);
+            },
+            heal:function () {
+                this.hpBarHero += 20;
+                if(this.hpBarHero >= 200){
+                    this.hpBarHero = 200;
+                }
+            },
+            specialAttack:function () {
+                if(this.hpBarHero < 40) {
+                    this.hpBarMonster -= 100;
+                }
+            },
+            restart:function () {
+                this.hpBarHero = 200;
+            }
+        },
+        watch:{
+            hpBarHero:function () {
+                var vm = this;
+                if(this.hpBarHero <= 0) {
+                    alert("ELO TOLOL GAK COCOK MAEN GAME !!!");
+                    this.hpBarHero = 200;
+                    this.hpBarMonster = 200;
+                    this.hpStyleHero = "greenyellow";
+                    this.hpStyle="greenyellow";
+                }
+
+                if(this.hpBarHero < 140 && this.hpBarHero > 100){
+                    this.hpStyleHero = "yellow";
+                }else if(this.hpBarHero < 60){
+                    this.hpStyleHero = "red";
+                }
+
+                setTimeout(function () {
+                    if(vm.hpBarHero < 200){
+                        vm.hpBarHero -= 2;
+                    }else if( vm.hpBarHero >= 200){
+                        vm.hpBarHero = 200;
+                    }
+                },1000)
+            },
+            hpBarMonster:function () {
+                if(this.hpBarMonster <= 0) {
+                    alert("You Win");
+                    this.hpBarHero = 200;
+                    this.hpBarMonster = 200;
+                    this.hpStyleHero = "greenyellow";
+                    this.hpStyle="greenyellow";
+                }
+                if(this.hpBarMonster <= 140 && this.hpBarMonster >= 100){
+                    this.hpStyle = "yellow";
+                }else if(this.hpBarMonster < 60){
+                    this.hpStyle = "red";
+                }
+            },
+            menuButton:function () {
+                this.hpBarHero = 200;
+                this.hpBarMonster = 200;
+            }
+        }
+
+    });
+</script>
+
+
+</body>
+</html>
