@@ -13,9 +13,10 @@
 </div>
 <div id="app2">
     <h1>{{title}}</h1>
+    <button @click="onChange">Change something in Vue 1 </button>
 </div>
 <script>
-    new Vue({
+    var vm1 = new Vue({
        el:'#app1',
         data:{
            title: 'The VueJs Instance',
@@ -37,15 +38,24 @@
         },
         watch:{
             title:function (value) {
-                alert('Title changed, new value' + value);
+                alert('Title changed, new value ' + value);
             }
         }
     });
+
+    setTimeout(function () {
+        vm1.title = 'Changed By Timer';
+    },5000);
 
     new Vue({
        el:'#app2',
         data:{
             title:'The second Instance'
+        },
+        methods:{
+            onChange: function () {
+                vm1.title = 'Changed!';
+            }
         }
     });
 </script>
