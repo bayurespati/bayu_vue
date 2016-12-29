@@ -25,9 +25,9 @@
         <!-- MONSTER -->
         <div class="monster">
             <p class="fontStyle">Bos Monster</p>
-            <div class="bcg">
+            <div class="bcg" :style="{width : hpBarMonsterLVL + 'px'}">
                 <div class="hpStyle" :style="[{width : hpBarMonster + 'px'}, {backgroundColor : hpStyle}]">
-                    <span>{{ hpBarMonster / 2 }}</span>
+                    <span>{{ hpBarMonster / pembagi }}</span>
                 </div>
             </div>
         </div>
@@ -35,54 +35,117 @@
 
         <div class="warpButton">
 
-            <button v-if="menuButton" class="startButton" @click="menuButton = false, restart">Start New Game</button>
-            <div v-if="!menuButton">
+            <button v-if="menuButton" class="startButton" @click="startNewGame">Start New Game</button>
+
+            <div v-if="!buttonLevel">
+                <button class="attack" @click="level1">Level 1</button>
+                <button class="attack" @click="level2">Level 2</button>
+                <button class="attack" @click="level3">level 3</button>
+            </div>
+
+
+            <div v-if="!menuPlay">
                 <button class="attack" @click="attack">Attack</button>
-                <button class="specialAttack" @click="specialAttack">Special Attack</button>
+                <button :class="effectSpecialAtk" @click="specialAttack">Special Attack</button>
                 <button class="heal"@click="heal">Heal</button>
-                <button class="giveUp" @click="menuButton = true">GiveUp</button>
-                <p style="color : red">* You can use special Attack When you Hp below 20</p>
+                <button class="giveUp" @click="giveUp">GiveUp</button>
+                <p style="color : red">* You can use special Attack When you Hp below 30</p>
             </div>
         </div>
+
+        <div v-if="!hidenNotice" class="notice">
+            <ul>
+                <p v-for="printAttack in noticeAttack">{{printAttack}}</p>
+            </ul>
+        </div>
     </div>
-
-    <div class="menu">
-
-    </div>
-
 </div>
 <script>
     new Vue({
        el:'#exercise',
         data:{
             menuButton : true,
+            buttonLevel: true,
+            menuPlay: true,
+
+            pembagi: 2,
+            hpBarMonsterLVL: 200,
             hpBarHero : 200,
             hpBarMonster: 200,
-            hpStyle: 'greenyellow',
-            hpStyleHero: 'greenyellow'
+            effectSpecialAtk : {
+                specialAttack : false,
+                specialAttackActive: true
+            },
+            SAactive: false,
+            noticeAttack: [],
+            hidenNotice: true,
+            notice1: 'noticeHero'
+
         },
         methods:{
             startNewGame:function () {
+                this.menuButton = false;
+                this.buttonLevel =  false;
+
+                this.hidenNotice = true;
+                this.SAactive = true;
+                this.hpBarMonster = 200;
                 this.hpBarHero = 200;
-                this.hpBarMonster= 200;
+            },
+
+            level1:function () {
+                this.buttonLevel =  true;
+                this.menuPlay = false;
+
+            },
+            level2:function () {
+                this.buttonLevel =  true;
+                this.menuPlay = false;
+                this.hpBarMonster = 400;
+                this.hpBarMonsterLVL = 400;
+                this.pembagi = 4;
+            },
+            level3:function () {
+                this.buttonLevel =  true;
+                this.menuPlay = false;
+                this.hpBarMonster = 600;
+                this.hpBarMonsterLVL = 600;
+                this.pembagi = 6;
             },
             attack:function () {
-                this.hpBarHero -= Math.floor(Math.random () * 30);
-                this.hpBarMonster -= Math.floor(Math.random () * 10);
+                var damageHero = Math.floor(Math.random () * 30);
+                var damageMonster = Math.floor(Math.random () * 10);
+                this.hpBarHero -= damageHero;
+                this.hpBarMonster -=  damageMonster;
+
+                this.hidenNotice = false;
+                this.noticeAttack.unshift("You got " + damageHero / this.pembagi + " damage");
+                this.noticeAttack.unshift("Monster got "+ damageMonster / this.pembagi + " damage");
             },
             heal:function () {
-                this.hpBarHero += 20;
-                if(this.hpBarHero >= 200){
-                    this.hpBarHero = 200;
+                if(this.hpBarHero > 0){
+                    this.hpBarHero += 20;
+                    if (this.hpBarHero >= 200) {
+                        this.hpBarHero = 200;
+                    }
                 }
             },
             specialAttack:function () {
-                if(this.hpBarHero < 40) {
-                    this.hpBarMonster -= 100;
+                if(this.hpBarHero <= 60 && this.hpBarHero > 0) {
+                    this.hpBarMonster -= 50;
                 }
             },
-            restart:function () {
+            giveUp:function () {
+                this.menuButton = true;
+                this.menuPlay = true;
+                this.hidenNotice = true;
+
+                this.noticeAttack = [];
+
+                this.pembagi = 2;
+                this.hpBarMonsterLVL = 200;
                 this.hpBarHero = 200;
+                this.hpBarMonster = 200;
             }
         },
         watch:{
@@ -90,43 +153,53 @@
                 var vm = this;
                 if(this.hpBarHero <= 0) {
                     alert("ELO TOLOL GAK COCOK MAEN GAME !!!");
-                    this.hpBarHero = 200;
-                    this.hpBarMonster = 200;
-                    this.hpStyleHero = "greenyellow";
-                    this.hpStyle="greenyellow";
+                    this.noticeAttack = [];
+                    this.menuButton = true;
+                    this.menuPlay = true;
+                    this.hpBarMonsterLVL = 200;
+                    return;
                 }
 
-                if(this.hpBarHero < 140 && this.hpBarHero > 100){
+                if(this.hpBarHero >= 140){
+                    this.hpStyleHero = "greenyellow";
+                }else if(this.hpBarHero < 140 && this.hpBarHero > 100){
                     this.hpStyleHero = "yellow";
                 }else if(this.hpBarHero < 60){
                     this.hpStyleHero = "red";
                 }
 
                 setTimeout(function () {
-                    if(vm.hpBarHero < 200){
-                        vm.hpBarHero -= 2;
-                    }else if( vm.hpBarHero >= 200){
-                        vm.hpBarHero = 200;
+                    if(vm.hpBarHero < 200 && vm.hpBarHero > 0 && vm.hpBarMonster > 0){
+                        var damageRandom = Math.floor(Math.random() * 2) + 1;
+                        vm.hpBarHero -= damageRandom;
+                        vm.noticeAttack.unshift("You Got "+damageRandom+ " damage");
                     }
                 },1000)
             },
             hpBarMonster:function () {
                 if(this.hpBarMonster <= 0) {
                     alert("You Win");
-                    this.hpBarHero = 200;
-                    this.hpBarMonster = 200;
-                    this.hpStyleHero = "greenyellow";
-                    this.hpStyle="greenyellow";
+                    this.noticeAttack = [];
+                    this.menuButton = true;
+                    this.menuPlay = true;
+                    this.hpBarMonsterLVL = 200;
+                    return;
                 }
-                if(this.hpBarMonster <= 140 && this.hpBarMonster >= 100){
+
+                if(this.hpBarMonster / this.pembagi >= 70){
+                 this.hpStyle = "greenyellow";
+                }else if(this.hpBarMonster / this.pembagi >= 50 && this.hpBarMonster / this.pembagi <= 70){
                     this.hpStyle = "yellow";
-                }else if(this.hpBarMonster < 60){
+                }else if(this.hpBarMonster / this.pembagi < 30){
                     this.hpStyle = "red";
                 }
             },
-            menuButton:function () {
-                this.hpBarHero = 200;
-                this.hpBarMonster = 200;
+            SAactive:function () {
+                var vm = this;
+                setInterval(function () {
+                    vm.effectSpecialAtk.specialAttack = !vm.effectSpecialAtk.specialAttack;
+                    vm.effectSpecialAtk.specialAttackActive = !vm.effectSpecialAtk.specialAttackActive;
+                },300)
             }
         }
 
