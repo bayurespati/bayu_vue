@@ -16,12 +16,13 @@
     <button @click="onChange">Change something in Vue 1 </button>
 </div>
 <script>
+    var data = {
+        title: 'The VueJs Instance',
+        showParagraph:false
+    };
     var vm1 = new Vue({
        el:'#app1',
-        data:{
-           title: 'The VueJs Instance',
-            showParagraph:false
-        },
+        data:data,
         methods:{
             show:function () {
                 this.showParagraph = true;
@@ -43,8 +44,11 @@
         }
     });
 
+    console.log(vm1.$data === data);
+
     setTimeout(function () {
         vm1.title = 'Changed By Timer';
+
     },5000);
 
     new Vue({
