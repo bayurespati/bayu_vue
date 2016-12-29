@@ -7,8 +7,8 @@
 </head>
 <body>
 <div id="app1">
-    <h1>{{title}}</h1>
-    <button @click="show">Show Paragrap</button>
+    <h1 ref="heading">{{title}}</h1>
+    <button @click="show" ref="myButton">Show Paragraph</button>
     <p v-if="showParagraph">This is not always visible</p>
 </div>
 <div id="app2">
@@ -26,7 +26,8 @@
         methods:{
             show:function () {
                 this.showParagraph = true;
-                this.updateTitle('The VueJS Instance (updated)')
+                this.updateTitle('The VueJS Instance (updated)');
+                this.$refs.myButton.innerText = 'Test';
             },
             updateTitle: function (tittle) {
                 this.title = tittle;
@@ -45,9 +46,11 @@
     });
 
     console.log(vm1.$data === data);
+    vm1.$refs.heading.innerText = "Something else";
 
     setTimeout(function () {
         vm1.title = 'Changed By Timer';
+        vm1.show();
 
     },5000);
 
