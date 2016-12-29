@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJs</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app1">
+    <h1>{{title}}</h1>
+    <button @click="show">Show Paragrap</button>
+    <p v-if="showParagraph">This is not always visible</p>
+</div>
+<div id="app2">
+    <h1>{{title}}</h1>
+</div>
+<script>
+    new Vue({
+       el:'#app1',
+        data:{
+           title: 'The VueJs Instance',
+            showParagraph:false
+        },
+        methods:{
+            show:function () {
+                this.showParagraph = true;
+                this.updateTitle('The VueJS Instance (updated)')
+            },
+            updateTitle: function (tittle) {
+                this.title = tittle;
+            }
+        },
+        computed:{
+          lowercaseTitle:function () {
+              return this.title.toLowerCase();
+          }
+        },
+        watch:{
+            title:function (value) {
+                alert('Title changed, new value' + value);
+            }
+        }
+    });
+
+    new Vue({
+       el:'#app2',
+        data:{
+            title:'The second Instance'
+        }
+    });
+</script>
+
+</body>
+</html>
