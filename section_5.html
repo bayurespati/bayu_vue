@@ -15,6 +15,9 @@
     <h1>{{title}}</h1>
     <button @click="onChange">Change something in Vue 1 </button>
 </div>
+<div id="app3">
+
+</div>
 <script>
     var data = {
         title: 'The VueJs Instance',
@@ -65,6 +68,17 @@
             }
         }
     });
+
+    var vm3 = new Vue({
+       template: '<h1>Hello!</h1>'
+    });
+
+    vm3.$mount();
+    document.getElementById('app3').appendChild(vm3.$el);
+
+    /*or
+    vm3.$mount('#app3')*/
+
 </script>
 
 </body>
