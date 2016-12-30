@@ -14,11 +14,17 @@
 <div id="app2">
     <h1>{{title}}</h1>
     <button @click="onChange">Change something in Vue 1 </button>
+    <hello></hello>
+    <hello></hello>
 </div>
 <div id="app3">
 
 </div>
 <script>
+    Vue.component('Hello',{
+        template: '<h1>Hellow!</h1>'
+    });
+
     var data = {
         title: 'The VueJs Instance',
         showParagraph:false
