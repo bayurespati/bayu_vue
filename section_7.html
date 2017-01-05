@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>VueJS</title>
+    <script src="vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <my-cmp></my-cmp>
+    <hr>
+    <my-cmp></my-cmp>
+</div>
+<script>
+    //if want to share same dara source
+    //var data={ status: 'Critical'};
+    Vue.component('my-cmp',{
+        //if want to share same dara source
+        /*data: function () {
+          return data;
+        },*/
+
+
+        data: function () {
+            return {
+                status: 'Critical'
+            }
+        },
+        template: '<p>Server Status:{{status}} (<button @click="changeStatus">Change</button>)</p>',
+        methods:{
+            changeStatus: function () {
+                this.status = 'normal'
+            }
+        }
+    });
+
+    new Vue({
+        el: '#app'
+    });
+</script>
+</body>
+</html>
