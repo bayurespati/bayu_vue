@@ -1,10 +1,11 @@
 <template>
   <div class="container">
     <app-header></app-header>
+    <p v-for="testPrint in servers">{{ testPrint }}</p>
     <hr>
     <div class="row">
-      <servers></servers>
-      <app-server-details></app-server-details>
+      <servers @sendData="servers.push($event)"></servers>
+      <app-server-details ></app-server-details>
     </div>
     <hr>
     <app-footer></app-footer>
@@ -23,6 +24,18 @@
             Servers,
             'app-server-details': ServerDetails,
             'app-footer': Footer
+        },
+        data: function(){
+            return{
+                servers: [],
+                data: ''
+            }
+
+        },
+        methods:{
+          proses(){
+            this.servers.push('')
+          }
         }
     }
 </script>
