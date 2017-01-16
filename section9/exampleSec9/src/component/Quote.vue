@@ -16,4 +16,7 @@
         margin: 30px atuo;
         text-align: center;
     }
+    h2{
+        color: red;
+    }
 </style>
