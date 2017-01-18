@@ -1,27 +1,28 @@
 <template>
-    <div>
-        <header-component/>
-        <div>this is template body</div>
-        <other-component/>
+    <div class="col-sm-6 col-md-4 col-lg-3">
+        <div class="panel panel-default">
+            <div class="panel-body quote">
+                <slot></slot>
+            </div>
+        </div>
     </div>
 </template>
+
+<script>
+</script>
+
 <style>
-    body{
-        background-color:#ff0000;
+    .panel-body{
+        font-family: 'Arizonia', cursive;
+        font-size: 24px;
+        color: #6e6e6e;
+    }
+
+    .quote{
+        cursor: pointer;
+    }
+
+    .quote:hover{
+        background-color: #ffe2e2;
     }
 </style>
-<script>
-    import HeaderComponent from './components/header.vue'
-    import OtherComponent from './components/other.vue'
-    export default{
-        data(){
-            return{
-                msg:'hello vue'
-            }
-        },
-        components:{
-            'other-component':OtherComponent,
-            HeaderComponent,
-        }
-    }
-</script>
