@@ -3,24 +3,50 @@
     <div class="row">
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <h1>Filters & Mixins</h1>
+
         <p class="btn btn-primary">{{ text | toUppercase | to-lowercase}}</p>
+        <hr>
+
+        <input v-model="filterText">
+
+        <ul>
+         <li v-for="fruit in filteredFruit"><a> {{ fruit }} </a></li>
+        </ul>
+        <hr>
+
+        <app-list></app-list>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
+  import List from './List.vue';
   export default{
     data(){
       return{
-          text: "How Fucking are you?"
+          text: "How Fucking are you?",
+          fruit: ['Jeruk','Mangga','Sirsak','Jambu','lengkeng'],
+          filterText: ''
       }
     },
     filters: {
       toUppercase(value){
-        return value.toUpperCase();
+      return value.toUpperCase();
       }
+    },
+    computed:{
+      filteredFruit(){
+        return this.fruit.filter((element) =>{
+        return element.match(this.filterText);
+       });
+      }
+    },
+    components:{
+      appList: List
     }
+
   }
 </script>
 
