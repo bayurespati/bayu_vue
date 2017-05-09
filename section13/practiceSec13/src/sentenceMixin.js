@@ -10,4 +10,4 @@ export const sentenceMixin = {
             return this.inputText.split("").reverse().join("");
         }
     }
-}
+};

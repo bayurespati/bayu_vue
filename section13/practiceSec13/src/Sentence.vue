@@ -2,7 +2,7 @@
     <div>
         <input v-model="inputText">
 
-        <p style="margin-top: 30px">{{reversedSentence}} ({{ reversedSentence | countLatter }})</p>
+        <p style="margin-top: 30px">{{ reversedSentence | countLatter }}</p>
     </div>
 </template>
 <script>
