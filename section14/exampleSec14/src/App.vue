@@ -9,18 +9,9 @@
         <transition name="fade">
           <div class="alert alert-info" v-if="show">This is some Info.</div>
         </transition>
-        <transition name="slide">
+        <transition name="slide" type="animation">
           <div class="alert alert-info" v-if="show">This is some Info.</div>
         </transition>
-        <!--<transition name="slide">-->
-          <!--<div class="alert alert-info" v-if="show">This is some Info.</div>-->
-        <!--</transition>-->
-        <!--<transition name="slide">-->
-          <!--<div class="alert alert-info" v-if="show">This is some Info.</div>-->
-        <!--</transition>-->
-        <!--<transition name="slide">-->
-          <!--<div class="alert alert-info" v-if="show">This is some Info.</div>-->
-        <!--</transition>-->
       </div>
     </div>
   </div>
