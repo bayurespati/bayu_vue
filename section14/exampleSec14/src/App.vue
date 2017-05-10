@@ -4,13 +4,34 @@
       <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3">
         <h1>Animation</h1>
         <hr>
+        <select v-model="alertAnimation" class="form-control">
+          <option value="fade">Fade</option>
+          <option value="slide">Slide</option>
+        </select>
+        <br><br>
         <button class="btn btn-primary" @click="show = !show" k>Show Alert</button>
         <br><br>
-        <transition name="fade">
+        <transition
+                enter-active-class="animated bounceInUp"
+                leave-active-class="animated fadeOutLeftBig"
+                appear>
+          <div class="alert alert-success" v-if="show">This is some Info.</div>
+        </transition>
+        <transition
+                name="fade"
+                leave-active-class="animated zoomOutUp">
           <div class="alert alert-info" v-if="show">This is some Info.</div>
         </transition>
-        <transition name="slide" type="animation">
-          <div class="alert alert-info" v-if="show">This is some Info.</div>
+        <transition
+                enter-active-class="animated bounceInDown"
+                leave-active-class="animated fadeOutRightBig"
+                appear>
+          <div class="alert alert-danger" v-if="show">This is some Info.</div>
+        </transition>
+        <transition
+                :name="alertAnimation"
+                appear>
+          <div class="alert alert-warning" v-if="show">This is some Info.</div>
         </transition>
       </div>
     </div>
@@ -21,7 +42,8 @@
   export default{
     data(){
       return{
-        show:false
+        show:false,
+       alertAnimation:''
       }
     }
   }
