@@ -27,7 +27,7 @@
             <p class="fontStyle">Bos Monster</p>
             <div class="bcg" :style="{width : hpBarMonsterLVL + 'px'}">
                 <div class="hpStyle" :style="[{width : hpBarMonster + 'px'}, {backgroundColor : hpStyle}]">
-                    <span>{{ hpBarMonster / pembagi }}</span>
+                    <span>{{ hpBarMonster }}</span>
                 </div>
             </div>
         </div>
@@ -86,10 +86,10 @@
             startNewGame:function () {
                 this.menuButton = false;
                 this.buttonLevel =  false;
-
                 this.hidenNotice = true;
-                this.SAactive = true;
+                this.SAactive = false;
                 this.hpBarMonster = 200;
+                this.pembagi= 2;
                 this.hpBarHero = 200;
             },
 
@@ -157,6 +157,7 @@
                     this.menuButton = true;
                     this.menuPlay = true;
                     this.hpBarMonsterLVL = 200;
+                    this.hpStyle = "greenyellow";
                     return;
                 }
 
@@ -183,6 +184,7 @@
                     this.menuButton = true;
                     this.menuPlay = true;
                     this.hpBarMonsterLVL = 200;
+                    this.hpStyle = "greenyellow";
                     return;
                 }
 
@@ -199,7 +201,7 @@
                 setInterval(function () {
                     vm.effectSpecialAtk.specialAttack = !vm.effectSpecialAtk.specialAttack;
                     vm.effectSpecialAtk.specialAttackActive = !vm.effectSpecialAtk.specialAttackActive;
-                },300)
+                }, 300)
             }
         }
 
