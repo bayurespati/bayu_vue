@@ -13,9 +13,11 @@ export const routes = [
     { path: '/user', components:{
         default: User,
         'header-bottom': Header
-    } , children:[
+    }, children:[
         { path: '', component: UserStart },
         { path: ':id', component: UserDetail },
         { path: ':id/edit', component: UserEdit, name: 'userEdit' }
-    ]}
+    ]},
+    { path: '/redirect-me', redirect: { name:'home' } },
+    { path: '*', redirect: '/' }
 ];
