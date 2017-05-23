@@ -7,10 +7,7 @@ const mutations = {
     'BUY_STOCK'(state,{stockId,quantity,stockPrice}){
         const record = state.stocks.find(element => element.id == stockId);
         if(record){
-
-            console.log(record.quantity);
-            console.log(typeof(record.quantity));
-            console.log(typeof(quantity));
+            record.quantity = (record.quantity + quantity);
         }else{
             state.stocks.push({
                 id:stockId,
