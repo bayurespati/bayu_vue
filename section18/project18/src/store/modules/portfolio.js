@@ -7,7 +7,10 @@ const mutations = {
     'BUY_STOCK'(state,{stockId,quantity,stockPrice}){
         const record = state.stocks.find(element => element.id == stockId);
         if(record){
-            record.quantity += quantity;
+
+            console.log(record.quantity);
+            console.log(typeof(record.quantity));
+            console.log(typeof(quantity));
         }else{
             state.stocks.push({
                 id:stockId,
@@ -29,7 +32,7 @@ const mutations = {
 
 const actions = {
     sellStock({commit}, order){
-        commit('SELL_STOCK', order);
+        commit('SELL_STOCKS', order);
     }
 };
 
