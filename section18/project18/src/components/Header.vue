@@ -53,7 +53,7 @@
         },
         methods:{
             ...mapActions({
-                randomizeStocks : 'randomizeStocks',
+                randomizeStock : 'randomizeStock',
                 fetchData: 'loadData'
             }),
             endDay(){

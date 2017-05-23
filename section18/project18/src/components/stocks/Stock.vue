@@ -1,5 +1,4 @@
 <template>
-    <div>
     <div class="col-sm-6">
         <div class="panel panel-success">
             <div class="panel-heading">
@@ -14,7 +13,7 @@
                             type="number"
                             class="form-control"
                             placeholder="Quantity"
-                            v-model="quantity"
+                            v-model.number= "quantity"
                             :class="{danger: insufficientFunds}"
                     >
                 </div>
@@ -22,7 +21,7 @@
                     <button
                             class="btn btn-success"
                             @click="buyStock"
-                            :disabled="insufficientFunds ||  quantity <= 0"
+                            :disabled="insufficientFunds ||  quantity <= 0 || !Number.isInteger(quantity)"
                     >{{ insufficientFunds ? 'insufficient Funds' : 'Buy' }}</button>
                 </div>
             </div>
